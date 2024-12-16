@@ -14,17 +14,20 @@ namespace WinFormsApp1
             bank = new Bank();
             atm = new AutomatedTellerMachine("ATM001", "Kyiv, Shevchenka 10", 10000);
 
-            // Додаємо постійні рахунки
+            
             Account fixedAccount1 = new Account("4441111131990099", "1234");
             Account fixedAccount2 = new Account("4441111131880088", "1234");
+            Account fixedAccount3 = new Account("4441111131450045", "1234");
             bank.AddAccount(fixedAccount1);
             bank.AddAccount(fixedAccount2);
+            bank.AddAccount(fixedAccount3);
 
-            // Підписка на подію для виведення повідомлень
-            bank.ShowMessage += ShowMessage; // Підписка на подію
+            
+            bank.ShowMessage += ShowMessage;          
+            atm.OperationPerformed += ShowMessage;    
         }
 
-        // Метод для виведення повідомлень через MessageBox
+        
         private void ShowMessage(string message)
         {
             MessageBox.Show(message);
@@ -32,7 +35,7 @@ namespace WinFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Завантаження форми
+            
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -61,7 +64,7 @@ namespace WinFormsApp1
                 decimal amount;
                 if (decimal.TryParse(textBox1.Text, out amount) && amount > 0)
                 {
-                    bank.Deposit(currentAccount, amount);  // Виводиться повідомлення через ShowMessage
+                    bank.Deposit(currentAccount, amount);  
                 }
                 else
                 {
@@ -79,10 +82,9 @@ namespace WinFormsApp1
             // Зняття коштів
             if (currentAccount != null)
             {
-                decimal amount;
-                if (decimal.TryParse(textBox1.Text, out amount) && amount > 0)
+                if (decimal.TryParse(textBox1.Text, out decimal amount) && amount > 0)
                 {
-                    atm.Withdraw(currentAccount, amount);  // Виводиться повідомлення через ShowMessage
+                    atm.Withdraw(currentAccount, amount);  
                 }
                 else
                 {
@@ -94,6 +96,7 @@ namespace WinFormsApp1
                 MessageBox.Show("Будь ласка, спочатку авторизуйтесь.");
             }
         }
+
 
         private void button4_Click_1(object sender, EventArgs e)
         {
@@ -117,7 +120,7 @@ namespace WinFormsApp1
                 decimal amount;
                 if (decimal.TryParse(textBox1.Text, out amount) && amount > 0)
                 {
-                    bank.Transfer(currentAccount, recipientCardNumber, amount);  // Виводиться повідомлення через ShowMessage
+                    bank.Transfer(currentAccount, recipientCardNumber, amount);  
                 }
                 else
                 {

@@ -6,18 +6,20 @@
 
         public Bank()
         {
-            // Створюємо два постійних рахунки при запуску програми
+          
             Account fixedAccount1 = new Account("4441111131990099", "1234");
             Account fixedAccount2 = new Account("4441111131880088", "1234");
+            Account fixedAccount3 = new Account("4441111131450045", "1234");
 
-            // Додаємо їх до банку
+            
             AddAccount(fixedAccount1);
             AddAccount(fixedAccount2);
+            AddAccount(fixedAccount3);
         }
 
         private List<Account> accounts = new List<Account>();
 
-        // Створити новий рахунок
+
         public void CreateAccount(string cardNumber, string pinCode)
         {
             var account = new Account(cardNumber, pinCode);
@@ -30,7 +32,7 @@
             accounts.Add(account);
         }
 
-        // Знайти рахунок за номером картки
+      
         public Account? FindAccount(string cardNumber)
         {
             return accounts.FirstOrDefault(acc => acc.CardNumber == cardNumber);
